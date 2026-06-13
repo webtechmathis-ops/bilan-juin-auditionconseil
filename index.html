@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audition Conseil · Bilan & Proposition SEO/GEO 12 mois</title>
+<style>
+  :root{
+    --violet:#5d18eb;
+    --violet-soft:#7b45f0;
+    --violet-tint:#f3eefe;
+    --violet-tint2:#ede5fd;
+    --ink:#15101f;
+    --ink-soft:#4a4458;
+    --muted:#8b8499;
+    --line:#e8e3f2;
+    --white:#ffffff;
+    --green:#16a34a;
+    --amber:#d97706;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);
+    background:var(--white);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+  section{padding:72px 0;border-bottom:1px solid var(--line)}
+  section:last-child{border-bottom:none}
+
+  /* HEADER */
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 32px;max-width:1080px;margin:0 auto;
+  }
+  .logo{font-weight:800;font-size:22px;letter-spacing:-0.5px;color:var(--ink)}
+  .logo span{color:var(--violet)}
+  .topbar .meta{font-size:12.5px;color:var(--muted);text-align:right;line-height:1.4}
+
+  /* HERO */
+  .hero{
+    background:linear-gradient(135deg,var(--violet) 0%,#4a0fd0 100%);
+    color:var(--white);
+    padding:84px 0 88px;
+    border-bottom:none;
+  }
+  .hero .page{max-width:1080px}
+  .hero .kicker{
+    display:inline-block;font-size:12px;font-weight:700;letter-spacing:1.5px;
+    text-transform:uppercase;color:#d7c4ff;margin-bottom:20px;
+    border:1px solid rgba(255,255,255,.25);padding:6px 14px;border-radius:40px;
+  }
+  .hero h1{font-size:46px;line-height:1.08;font-weight:800;letter-spacing:-1.2px;margin-bottom:18px}
+  .hero p.sub{font-size:18px;color:#e4d8ff;max-width:680px;font-weight:400}
+  .hero .client{margin-top:34px;font-size:14px;color:#cdb8ff;font-weight:600;letter-spacing:.5px}
+
+  /* SECTION TITLES */
+  .sec-kicker{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--violet);margin-bottom:12px}
+  h2{font-size:32px;font-weight:800;letter-spacing:-0.6px;line-height:1.15;margin-bottom:14px}
+  .lead{font-size:17px;color:var(--ink-soft);max-width:760px;margin-bottom:40px}
+
+  /* KPI ROW */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .kpi{
+    background:var(--violet-tint);border-radius:16px;padding:26px 22px;
+    border:1px solid var(--line);
+  }
+  .kpi .num{font-size:34px;font-weight:800;color:var(--violet);letter-spacing:-1px;line-height:1}
+  .kpi .num small{font-size:18px;font-weight:700}
+  .kpi .lbl{font-size:13px;color:var(--ink-soft);margin-top:10px;font-weight:500;line-height:1.35}
+  .kpi.accent{background:var(--violet);border-color:var(--violet)}
+  .kpi.accent .num{color:var(--white)}
+  .kpi.accent .lbl{color:#e4d8ff}
+
+  /* TREND BLOCK */
+  .trend{
+    display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;
+    background:var(--violet-tint);border-radius:20px;padding:40px;border:1px solid var(--line);
+  }
+  .trend h3{font-size:22px;font-weight:800;margin-bottom:16px;letter-spacing:-0.4px}
+  .trend ul{list-style:none}
+  .trend li{padding:11px 0;font-size:15px;color:var(--ink-soft);display:flex;gap:12px;align-items:flex-start;border-bottom:1px dashed var(--line)}
+  .trend li:last-child{border-bottom:none}
+  .trend li b{color:var(--ink)}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--green);margin-top:7px;flex-shrink:0}
+  .chartwrap{background:var(--white);border-radius:14px;padding:22px 18px 12px;border:1px solid var(--line)}
+  .chart-cap{font-size:12px;color:var(--muted);text-align:center;margin-top:8px}
+
+  /* ACTIONS GRID */
+  .actions{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .act{
+    border:1px solid var(--line);border-radius:16px;padding:28px;background:var(--white);
+    transition:transform .15s,box-shadow .15s;position:relative;overflow:hidden;
+  }
+  .act::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--violet)}
+  .act .ico{font-size:22px;margin-bottom:14px}
+  .act h4{font-size:17px;font-weight:800;margin-bottom:8px;letter-spacing:-0.3px}
+  .act p{font-size:14px;color:var(--ink-soft);line-height:1.5}
+  .act .tag{display:inline-block;margin-top:14px;font-size:12px;font-weight:700;color:var(--violet);background:var(--violet-tint);padding:5px 12px;border-radius:30px}
+
+  /* KEYWORDS TABLE */
+  table{width:100%;min-width:560px;border-collapse:collapse;font-size:14px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  thead th{background:var(--violet);color:var(--white);text-align:left;padding:14px 18px;font-weight:700;font-size:13px;letter-spacing:.3px}
+  tbody td{padding:13px 18px;border-top:1px solid var(--line);color:var(--ink-soft)}
+  tbody tr:nth-child(even){background:var(--violet-tint)}
+  tbody td b{color:var(--ink)}
+  .pos-bad{color:var(--amber);font-weight:700}
+  .vol{font-weight:700;color:var(--violet)}
+
+  /* GAP / CONCURRENCE */
+  .gap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:10px}
+  .gap-card{border:1px solid var(--line);border-radius:14px;padding:24px 20px;text-align:center}
+  .gap-card.us{background:var(--violet);border-color:var(--violet)}
+  .gap-card .rd{font-size:30px;font-weight:800;color:var(--violet);letter-spacing:-1px}
+  .gap-card.us .rd{color:var(--white)}
+  .gap-card .name{font-size:14px;font-weight:700;margin-top:6px;color:var(--ink)}
+  .gap-card.us .name{color:var(--white)}
+  .gap-card .role{font-size:11px;color:var(--muted);margin-top:3px;text-transform:uppercase;letter-spacing:.5px}
+  .gap-card.us .role{color:#cdb8ff}
+  .bar-row{display:flex;align-items:center;gap:14px;margin-top:14px}
+  .bar-row .bl{width:120px;font-size:13px;font-weight:700;color:var(--ink);flex-shrink:0}
+  .bar-track{flex:1;background:var(--violet-tint2);border-radius:8px;height:22px;overflow:hidden}
+  .bar-fill{height:100%;background:var(--violet);border-radius:8px;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;color:#fff;font-size:11px;font-weight:700}
+  .bar-fill.soft{background:var(--violet-soft)}
+  .bar-val{width:60px;text-align:right;font-size:13px;font-weight:700;color:var(--ink-soft);flex-shrink:0}
+
+  /* GEO METHOD */
+  .geo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .geo{border:1px solid var(--line);border-radius:16px;padding:26px;background:var(--violet-tint)}
+  .geo .n{font-size:13px;font-weight:800;color:var(--violet);margin-bottom:10px;letter-spacing:.5px}
+  .geo h4{font-size:16px;font-weight:800;margin-bottom:8px;letter-spacing:-0.3px}
+  .geo p{font-size:13.5px;color:var(--ink-soft);line-height:1.5}
+
+  /* PROPOSITION 12 MOIS */
+  .prop{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .prop-card{border:2px solid var(--violet-tint2);border-radius:18px;padding:30px}
+  .prop-card h4{font-size:18px;font-weight:800;margin-bottom:16px;display:flex;align-items:center;gap:10px;letter-spacing:-0.3px}
+  .prop-card ul{list-style:none}
+  .prop-card li{padding:10px 0 10px 26px;font-size:14.5px;color:var(--ink-soft);position:relative;border-bottom:1px solid var(--line);line-height:1.5}
+  .prop-card li:last-child{border-bottom:none}
+  .prop-card li::before{content:"→";color:var(--violet);font-weight:800;position:absolute;left:0;top:10px}
+  .prop-card li b{color:var(--ink)}
+
+  /* BUDGET */
+  .budget{background:linear-gradient(135deg,var(--violet) 0%,#4a0fd0 100%);border-radius:22px;padding:48px;color:#fff;border:none}
+  .budget h3{font-size:26px;font-weight:800;margin-bottom:8px;letter-spacing:-0.5px}
+  .budget .bsub{color:#e4d8ff;font-size:15px;margin-bottom:32px}
+  .budget-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+  .bcard{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:28px}
+  .bcard .blbl{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#d7c4ff;margin-bottom:12px}
+  .bcard .bval{font-size:32px;font-weight:800;letter-spacing:-1px;line-height:1.05}
+  .bcard .bval small{font-size:16px;font-weight:600}
+  .bcard .bnote{font-size:13px;color:#e4d8ff;margin-top:10px;line-height:1.45}
+
+  /* CONCLUSION */
+  .cta{text-align:center;padding:84px 0}
+  .cta h2{font-size:34px;margin-bottom:16px}
+  .cta p{font-size:17px;color:var(--ink-soft);max-width:620px;margin:0 auto 14px}
+  .sign{margin-top:36px;font-size:15px;color:var(--ink);font-weight:700}
+  .sign span{display:block;font-size:13px;color:var(--muted);font-weight:500;margin-top:4px}
+
+  footer{background:var(--ink);color:#b9b2c9;padding:34px 0;font-size:13px}
+  footer .page{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  footer .logo{color:#fff;font-size:18px}
+  footer .logo span{color:var(--violet-soft)}
+
+  .note{font-size:12.5px;color:var(--muted);margin-top:18px;font-style:italic}
+
+  @media (max-width:880px){
+    .kpis,.gap-grid{grid-template-columns:repeat(2,1fr)}
+    .trend,.actions,.geo-grid,.prop,.budget-grid{grid-template-columns:1fr}
+    .hero h1{font-size:34px}
+    h2{font-size:26px}
+    .budget{padding:32px}
+    .bar-row .bl{width:90px}
+  }
+  @media print{
+    .hero,.budget{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    section{page-break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo">kwantic<span>.</span></div>
+  <div class="meta">Bilan & Proposition stratégique<br>SEO / GEO · Juin 2026</div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="page">
+    <span class="kicker">Audition Conseil × Kwantic</span>
+    <h1>Tendance inversée.<br>L'autorité repart.</h1>
+    <p class="sub">Bilan des actions menées depuis le début du suivi et feuille de route SEO/GEO sur les 12 prochains mois pour transformer la reprise en croissance durable.</p>
+    <div class="client">PRÉPARÉ POUR AUDITIONCONSEIL.FR</div>
+  </div>
+</div>
+
+<!-- 1. RESULTATS CLES -->
+<section>
+  <div class="page">
+    <div class="sec-kicker">01 · Résultats clés</div>
+    <h2>Ce que le suivi a produit</h2>
+    <p class="lead">L'effet de bord technique de la refonte a été identifié et corrigé. Depuis février, la dynamique s'est inversée et la reprise se confirme mois après mois.</p>
+    <div class="kpis">
+      <div class="kpi accent">
+        <div class="num">+54<small>%</small></div>
+        <div class="lbl">de trafic organique entre février et mai 2026</div>
+      </div>
+      <div class="kpi">
+        <div class="num">24<small> +8</small></div>
+        <div class="lbl">articles SEO rédigés, 8 supplémentaires en cours</div>
+      </div>
+      <div class="kpi">
+        <div class="num">+27</div>
+        <div class="lbl">nouveaux domaines référents acquis depuis février</div>
+      </div>
+      <div class="kpi">
+        <div class="num">20</div>
+        <div class="lbl">pages clés retravaillées, autorité en reprise</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. TENDANCE -->
+<section>
+  <div class="page">
+    <div class="sec-kicker">02 · Trajectoire de trafic</div>
+    <h2>Rupture nette de la tendance baissière</h2>
+    <p class="lead">Le point bas de février marque le bas de cycle post-migration. Dès mars, la courbe se redresse : la reprise se confirme et s'accélère en mai.</p>
+    <div class="trend">
+      <div>
+        <h3>Lecture de la courbe</h3>
+        <ul>
+          <li><span class="dot"></span><div><b>Février 2026 :</b> point bas atteint, fin de l'effet de bord migration.</div></li>
+          <li><span class="dot"></span><div><b>Mars → avril :</b> redressement, premiers effets des corrections techniques et du netlinking.</div></li>
+          <li><span class="dot"></span><div><b>Mai 2026 :</b> ~20K clics, la reprise se confirme. Tendance désormais haussière.</div></li>
+          <li><span class="dot"></span><div><b>Signal fort :</b> reprise simultanée du trafic et de l'autorité de domaine.</div></li>
+        </ul>
+      </div>
+      <div class="chartwrap">
+        <svg viewBox="0 0 460 240" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="inherit">
+          <!-- grid -->
+          <line x1="40" y1="20" x2="40" y2="200" stroke="#e8e3f2" stroke-width="1"/>
+          <line x1="40" y1="200" x2="450" y2="200" stroke="#e8e3f2" stroke-width="1"/>
+          <line x1="40" y1="110" x2="450" y2="110" stroke="#f3eefe" stroke-width="1"/>
+          <text x="34" y="24" text-anchor="end" font-size="10" fill="#8b8499">40K</text>
+          <text x="34" y="114" text-anchor="end" font-size="10" fill="#8b8499">20K</text>
+          <text x="34" y="204" text-anchor="end" font-size="10" fill="#8b8499">0</text>
+          <!-- area: jul40 aug34 sep28 oct27 nov25 dec19 jan16 feb13(low) mar14 apr16.5 may20 -->
+          <path d="M40,20 L81,74 L122,128 L163,137 L204,155 L245,200 V200 H40 Z" fill="#ede5fd" opacity="0.5"/>
+          <path d="M204,155 L245,182 L286,191 L327,182 L368,155 L409,110 L409,200 L204,200 Z" fill="#ede5fd" opacity="0.55"/>
+          <!-- declining segment (muted) -->
+          <polyline points="40,20 81,74 122,128 163,137 204,155 245,182 286,191" fill="none" stroke="#b9a9e8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- recovery segment (strong violet) -->
+          <polyline points="286,191 327,182 368,155 409,110" fill="none" stroke="#5d18eb" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- low point marker -->
+          <circle cx="286" cy="191" r="5" fill="#fff" stroke="#5d18eb" stroke-width="2.5"/>
+          <text x="286" y="216" text-anchor="middle" font-size="9.5" fill="#8b8499">fév</text>
+          <!-- may marker -->
+          <circle cx="409" cy="110" r="5" fill="#5d18eb"/>
+          <text x="409" y="216" text-anchor="middle" font-size="9.5" fill="#5d18eb" font-weight="700">mai</text>
+          <text x="62" y="216" text-anchor="middle" font-size="9.5" fill="#8b8499">juil</text>
+          <!-- recovery label -->
+          <text x="360" y="92" font-size="10" fill="#5d18eb" font-weight="700">Reprise</text>
+        </svg>
+        <div class="chart-cap">Trafic organique mensuel · juil. 2025 → mai 2026</div>
+      </div>
+    </div>
+    <p class="note">Le redressement coïncide avec la correction de la migration, la reprise du netlinking (février) et la réoptimisation des pages clés.</p>
+  </div>
+</section>
+
+<!-- 3. ACTIONS MENEES -->
+<section>
+  <div class="page">
+    <div class="sec-kicker">03 · Actions menées</div>
+    <h2>Les leviers activés</h2>
+    <p class="lead">Un plan d'action complet, technique et éditorial, déployé pour réparer puis relancer la machine SEO.</p>
+    <div class="actions">
+      <div class="act">
+        <div class="ico">🔧</div>
+        <h4>Correction de la migration</h4>
+        <p>Redirection totale des URLs post-refonte. Suppression de l'effet de bord technique qui plombait l'indexation et l'autorité.</p>
+        <span class="tag">Fondation rétablie</span>
+      </div>
+      <div class="act">
+        <div class="ico">✍️</div>
+        <h4>Production éditoriale</h4>
+        <p>24 articles SEO rédigés et publiés, 8 supplémentaires en cours. Couverture des intentions de recherche du secteur audio.</p>
+        <span class="tag">24 + 8 articles</span>
+      </div>
+      <div class="act">
+        <div class="ico">🔗</div>
+        <h4>Reprise du netlinking</h4>
+        <p>Relancé en février (800 € investis), soit 27 nouveaux domaines référents. Signal d'autorité directement corrélé à la reprise.</p>
+        <span class="tag">+27 domaines référents</span>
+      </div>
+      <div class="act">
+        <div class="ico">⚡</div>
+        <h4>Réoptimisation des pages clés</h4>
+        <p>20 pages stratégiques retravaillées (contenu). Changement apprécié par Google, traduit par une reprise mesurable de l'autorité.</p>
+        <span class="tag">20 pages optimisées</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. POTENTIEL MOTS CLES -->
+<section>
+  <div class="page">
+    <div class="sec-kicker">04 · Potentiel non capté</div>
+    <h2>Du volume à portée de main</h2>
+    <p class="lead">Des requêtes à très fort volume sont déjà indexées mais mal positionnées. Les remonter représente le gisement de trafic le plus rapide à activer.</p>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
+    <table>
+      <thead>
+        <tr><th>Mot clé</th><th>Position actuelle</th><th>Volume mensuel</th><th>Enjeu</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><b>acouphène</b></td><td><span class="pos-bad">17</span></td><td class="vol">27 100</td><td>Top volume du secteur, page 2</td></tr>
+        <tr><td><b>appareil auditif</b></td><td><span class="pos-bad">15</span></td><td class="vol">9 900</td><td>Requête transactionnelle clé</td></tr>
+        <tr><td><b>acouphènes</b></td><td><span class="pos-bad">15</span></td><td class="vol">8 100</td><td>Variante à fort potentiel</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">Passer ces pages du bas de page 2 au top 10 active mécaniquement plusieurs milliers de visites mensuelles supplémentaires.</p>
+  </div>
+</section>
+
+<!-- 5. GAP CONCURRENCE -->
+<section>
+  <div class="page">
+    <div class="sec-kicker">05 · Position concurrentielle</div>
+    <h2>L'écart d'autorité à combler</h2>
+    <p class="lead">Le netlinking reste le principal facteur différenciant face aux grands réseaux. Le gap sur les domaines référents définit le rythme d'investissement nécessaire.</p>
+    <div class="gap-grid">
+      <div class="gap-card us">
+        <div class="rd">669</div>
+        <div class="name">Audition Conseil</div>
+        <div class="role">Nous</div>
+      </div>
+      <div class="gap-card">
+        <div class="rd">718</div>
+        <div class="name">Vivason</div>
+        <div class="role">Concurrent</div>
+      </div>
+      <div class="gap-card">
+        <div class="rd">2 450</div>
+        <div class="name">Krys</div>
+        <div class="role">Concurrent</div>
+      </div>
+      <div class="gap-card">
+        <div class="rd">3 578</div>
+        <div class="name">Amplifon</div>
+        <div class="role">Concurrent</div>
+      </div>
+    </div>
+
+    <div style="margin-top:32px">
+      <div class="bar-row"><div class="bl">Audition Conseil</div><div class="bar-track"><div class="bar-fill" style="width:18.7%">669</div></div></div>
+      <div class="bar-row"><div class="bl">Vivason</div><div class="bar-track"><div class="bar-fill soft" style="width:20%">718</div></div></div>
+      <div class="bar-row"><div class="bl">Krys</div><div class="bar-track"><div class="bar-fill soft" style="width:68.5%">2 450</div></div></div>
+      <div class="bar-row"><div class="bl">Amplifon</div><div class="bar-track"><div class="bar-fill soft" style="width:100%">3 578</div></div></div>
+    </div>
+    <p class="note">Domaines référents (source Majestic). Vivason est à portée immédiate ; combler l'écart avec Krys et Amplifon justifie un investissement netlinking soutenu et régulier.</p>
+  </div>
+</section>
+
+<!-- 6. PROPOSITION 12 MOIS -->
+<section>
+  <div class="page">
+    <div class="sec-kicker">06 · Feuille de route 12 mois</div>
+    <h2>Ce que nous préconisons</h2>
+    <p class="lead">Conserver la dynamique enclenchée et l'amplifier. Trois axes : volume éditorial, autorité, et conversion des pages à fort potentiel.</p>
+    <div class="prop">
+      <div class="prop-card">
+        <h4>📈 Contenu & conversion</h4>
+        <ul>
+          <li>Maintenir le rythme de <b>8 articles SEO/mois</b></li>
+          <li>Optimiser en priorité les <b>pages qui convertissent</b>, puis celles à fort trafic</li>
+          <li>Récupérer les <b>mots-clés à fort volume mal positionnés</b> (acouphène, appareil auditif…)</li>
+          <li>Optimiser les <b>320 pages centres</b> : levier local à plus fort effet multiplicateur</li>
+        </ul>
+      </div>
+      <div class="prop-card">
+        <h4>🔗 Autorité & visibilité IA</h4>
+        <ul>
+          <li>Augmenter le <b>budget netlinking mensuel</b> pour combler le gap concurrentiel</li>
+          <li>Renforcer le <b>maillage interne</b> vers les pages centres</li>
+          <li>Déployer le <b>protocole GEO</b> pour maximiser les citations dans les moteurs IA</li>
+          <li>Mettre en place un <b>reporting de positions mensuel</b></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. GEO -->
+<section>
+  <div class="page">
+    <div class="sec-kicker">07 · Avantage GEO</div>
+    <h2>Être cité par les IA, pas seulement classé</h2>
+    <p class="lead">ChatGPT, Perplexity et les AI Overviews deviennent une porte d'entrée majeure. Notre méthodologie maximise la probabilité de citation tout en renforçant le SEO classique.</p>
+    <div class="geo-grid">
+      <div class="geo">
+        <div class="n">FONDATION</div>
+        <h4>Contenu lisible par les IA</h4>
+        <p>Information critique servie dans le HTML, indexée Google et Bing. Une page invisible des index est invisible des IA.</p>
+      </div>
+      <div class="geo">
+        <div class="n">TRIADE</div>
+        <h4>Stats, sources, experts</h4>
+        <p>Chaque section porte un chiffre précis, une source autoritaire ou une citation d'expert : les seuls signaux validés empiriquement.</p>
+      </div>
+      <div class="geo">
+        <div class="n">EXTRACTIBILITÉ</div>
+        <h4>Réponse en 1ère phrase</h4>
+        <p>Chaque bloc répond directement à la requête et survit isolé : c'est ce que les moteurs extraient pour citer.</p>
+      </div>
+      <div class="geo">
+        <div class="n">AUTORITÉ OFF-SITE</div>
+        <h4>Cohérence d'entité</h4>
+        <p>Fiches, annuaires santé et mentions externes cohérents : ~86% des citations IA viennent de sources contrôlables.</p>
+      </div>
+      <div class="geo">
+        <div class="n">YMYL SANTÉ</div>
+        <h4>Conformité & confiance</h4>
+        <p>Contenu santé sourcé, sans claim non autorisé, avec autorités réelles : indispensable sur les requêtes audition.</p>
+      </div>
+      <div class="geo">
+        <div class="n">MESURE</div>
+        <h4>Boucle de citation</h4>
+        <p>Requêtes piliers testées sur les moteurs IA, suivi des citations gagnées et perdues. Le vrai différenciant.</p>
+      </div>
+    </div>
+    <p class="note">Aucun protocole ne garantit la citation : la sélection des moteurs IA est non déterministe. La méthode en maximise la probabilité et améliore mécaniquement le SEO.</p>
+  </div>
+</section>
+
+<!-- 8. BUDGET -->
+<section>
+  <div class="page">
+    <div class="sec-kicker">08 · Investissement</div>
+    <h2>Budget proposé sur 12 mois</h2>
+    <p class="lead">Un investissement calibré pour transformer la reprise en croissance et réduire l'écart concurrentiel.</p>
+    <div class="budget">
+      <h3>Accompagnement SEO / GEO + Netlinking</h3>
+      <div class="bsub">Engagement mensuel sur 12 mois</div>
+      <div class="budget-grid">
+        <div class="bcard">
+          <div class="blbl">Pilotage SEO / GEO</div>
+          <div class="bval">2 à 4 <small>jours / mois</small></div>
+          <div class="bnote">Production éditoriale, optimisation des pages, pages centres, maillage, GEO, reporting de positions.</div>
+        </div>
+        <div class="bcard">
+          <div class="blbl">Netlinking</div>
+          <div class="bval">1 000 <small>€ / mois</small></div>
+          <div class="bnote">Acquisition de domaines référents pour combler le gap concurrentiel. Budget nécessaire pour un rythme d'autorité compétitif.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta">
+  <div class="page">
+    <h2>La tendance est repartie. Accélérons.</h2>
+    <p>Les fondations sont réparées, l'autorité reprend et le potentiel de trafic est identifié. Les 12 prochains mois transforment ce redressement en croissance durable.</p>
+    <div class="sign">Mathis Bricourt · Kwantic<span>SEO / GEO · Juin 2026</span></div>
+  </div>
+</div>
+
+<footer>
+  <div class="page">
+    <div class="logo">kwantic<span>.</span></div>
+    <div>Bilan & Proposition SEO/GEO · Audition Conseil · Confidentiel · Juin 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>
