@@ -9,14 +9,19 @@
     --violet:#5d18eb;--violet-deep:#4a0fd0;--violet-soft:#7b45f0;
     --violet-tint:#f3eefe;--violet-tint2:#ede5fd;
     --ink:#15101f;--ink-soft:#4a4458;--muted:#8b8499;--line:#e8e3f2;
-    --white:#ffffff;--green:#16a34a;--amber:#d97706;--red:#dc2626;
+    --white:#ffffff;--green:#16a34a;--amber:#d97706;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--white);line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--white);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   .page{max-width:1080px;margin:0 auto;padding:0 32px}
   section{padding:72px 0;border-bottom:1px solid var(--line)}
   section:last-child{border-bottom:none}
+
+  /* REVEAL ANIMATION */
+  .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+  .reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}.reveal-d4{transition-delay:.35s}
 
   /* TOPBAR */
   .topbar{display:flex;align-items:center;justify-content:space-between;padding:22px 32px;max-width:1080px;margin:0 auto}
@@ -25,7 +30,11 @@
   .topbar .meta{font-size:12.5px;color:var(--muted);text-align:right;line-height:1.4}
 
   /* HERO */
-  .hero{background:linear-gradient(135deg,var(--violet) 0%,var(--violet-deep) 100%);color:#fff;padding:84px 0 88px;border-bottom:none}
+  .hero{background:linear-gradient(135deg,var(--violet) 0%,var(--violet-deep) 100%);color:#fff;padding:84px 0 88px;border-bottom:none;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;top:-40%;right:-15%;width:600px;height:600px;border-radius:50%;background:rgba(255,255,255,.04);animation:float 8s ease-in-out infinite}
+  .hero::after{content:"";position:absolute;bottom:-30%;left:-10%;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,.03);animation:float 10s ease-in-out infinite reverse}
+  @keyframes float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-30px) scale(1.05)}}
+  .hero .page{position:relative;z-index:1}
   .hero .kicker{display:inline-block;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#d7c4ff;margin-bottom:20px;border:1px solid rgba(255,255,255,.25);padding:6px 14px;border-radius:40px}
   .hero h1{font-size:46px;line-height:1.08;font-weight:800;letter-spacing:-1.2px;margin-bottom:18px}
   .hero p.sub{font-size:18px;color:#e4d8ff;max-width:700px;font-weight:400}
@@ -49,7 +58,8 @@
 
   /* ACTIONS GRID */
   .actions{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
-  .act{border:1px solid var(--line);border-radius:16px;padding:28px;background:var(--white);position:relative;overflow:hidden}
+  .act{border:1px solid var(--line);border-radius:16px;padding:28px;background:var(--white);position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+  .act:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(93,24,235,.1)}
   .act::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--violet)}
   .act .ico{font-size:22px;margin-bottom:14px}
   .act h4{font-size:17px;font-weight:800;margin-bottom:8px;letter-spacing:-.3px}
@@ -62,6 +72,8 @@
   thead th{background:var(--violet);color:#fff;text-align:left;padding:14px 18px;font-weight:700;font-size:13px;letter-spacing:.3px}
   tbody td{padding:13px 18px;border-top:1px solid var(--line);color:var(--ink-soft)}
   tbody tr:nth-child(even){background:var(--violet-tint)}
+  tbody tr{transition:background .2s}
+  tbody tr:hover{background:var(--violet-tint2)}
   tbody td b{color:var(--ink)}
   .pos-bad{color:var(--amber);font-weight:700}
   .pos-good{color:var(--green);font-weight:700}
@@ -69,7 +81,8 @@
 
   /* GAP */
   .gap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:10px}
-  .gap-card{border:1px solid var(--line);border-radius:14px;padding:24px 20px;text-align:center}
+  .gap-card{border:1px solid var(--line);border-radius:14px;padding:24px 20px;text-align:center;transition:transform .2s}
+  .gap-card:hover{transform:translateY(-3px)}
   .gap-card.us{background:var(--violet);border-color:var(--violet)}
   .gap-card .rd{font-size:30px;font-weight:800;color:var(--violet);letter-spacing:-1px}
   .gap-card.us .rd{color:#fff}
@@ -80,18 +93,20 @@
   .bar-row{display:flex;align-items:center;gap:14px;margin-top:14px}
   .bar-row .bl{width:120px;font-size:13px;font-weight:700;color:var(--ink);flex-shrink:0}
   .bar-track{flex:1;background:var(--violet-tint2);border-radius:8px;height:22px;overflow:hidden}
-  .bar-fill{height:100%;background:var(--violet);border-radius:8px;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;color:#fff;font-size:11px;font-weight:700}
+  .bar-fill{height:100%;background:var(--violet);border-radius:8px;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;color:#fff;font-size:11px;font-weight:700;width:0;transition:width 1.2s cubic-bezier(.16,1,.3,1)}
   .bar-fill.soft{background:var(--violet-soft)}
 
   /* GEO IMPACT */
-  .geo-hero{background:linear-gradient(135deg,var(--violet) 0%,var(--violet-deep) 100%);border-radius:22px;padding:48px;color:#fff;margin-bottom:32px}
-  .geo-hero h3{font-size:28px;font-weight:800;margin-bottom:12px;letter-spacing:-.5px}
-  .geo-hero .stat-row{display:flex;gap:32px;margin-top:28px;flex-wrap:wrap}
+  .geo-hero{background:linear-gradient(135deg,var(--violet) 0%,var(--violet-deep) 100%);border-radius:22px;padding:48px;color:#fff;margin-bottom:32px;position:relative;overflow:hidden}
+  .geo-hero::before{content:"";position:absolute;top:-50%;right:-20%;width:500px;height:500px;border-radius:50%;background:rgba(255,255,255,.04);animation:float 9s ease-in-out infinite}
+  .geo-hero h3{font-size:28px;font-weight:800;margin-bottom:12px;letter-spacing:-.5px;position:relative}
+  .geo-hero .stat-row{display:flex;gap:32px;margin-top:28px;flex-wrap:wrap;position:relative}
   .geo-hero .stat{text-align:center}
   .geo-hero .stat .big{font-size:44px;font-weight:800;letter-spacing:-1.5px;line-height:1}
   .geo-hero .stat .slbl{font-size:13px;color:#d7c4ff;margin-top:8px;max-width:180px;line-height:1.35}
   .geo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-  .geo{border:1px solid var(--line);border-radius:16px;padding:26px;background:var(--violet-tint)}
+  .geo{border:1px solid var(--line);border-radius:16px;padding:26px;background:var(--violet-tint);transition:transform .2s,box-shadow .2s}
+  .geo:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(93,24,235,.08)}
   .geo .n{font-size:13px;font-weight:800;color:var(--violet);margin-bottom:10px;letter-spacing:.5px}
   .geo h4{font-size:16px;font-weight:800;margin-bottom:8px;letter-spacing:-.3px}
   .geo p{font-size:13.5px;color:var(--ink-soft);line-height:1.5}
@@ -99,7 +114,8 @@
   /* SERP SNAPSHOT */
   .serp{border:1px solid var(--line);border-radius:16px;padding:30px;margin-top:28px}
   .serp h4{font-size:17px;font-weight:800;margin-bottom:16px}
-  .serp-item{display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .serp-item{display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;transition:background .15s}
+  .serp-item:hover{background:var(--violet-tint);margin:0 -10px;padding-left:10px;padding-right:10px;border-radius:8px}
   .serp-item:last-child{border-bottom:none}
   .serp-pos{width:28px;height:28px;border-radius:50%;background:var(--violet-tint);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:var(--violet);flex-shrink:0}
   .serp-item.us .serp-pos{background:var(--violet);color:#fff}
@@ -107,9 +123,26 @@
   .serp-item.us .serp-domain{color:var(--violet)}
   .serp-tf{font-size:12px;color:var(--muted);margin-left:auto;flex-shrink:0}
 
+  /* CAS CONCRET BEFORE/AFTER */
+  .case-box{background:var(--violet-tint);border-radius:20px;padding:36px;margin-top:28px;border:2px solid var(--violet);position:relative;overflow:hidden}
+  .case-box::before{content:"CAS CONCRET";position:absolute;top:0;right:0;background:var(--violet);color:#fff;font-size:10px;font-weight:800;letter-spacing:1.5px;padding:6px 16px;border-radius:0 0 0 12px}
+  .case-box h4{font-size:18px;font-weight:800;color:var(--violet);margin-bottom:20px}
+  .case-evol{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center;margin-bottom:24px}
+  .case-card{background:var(--white);border-radius:14px;padding:22px;text-align:center;border:1px solid var(--line)}
+  .case-card .cc-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .case-card .cc-pos{font-size:42px;font-weight:800;letter-spacing:-1.5px;line-height:1}
+  .case-card.before .cc-pos{color:var(--amber)}
+  .case-card.after .cc-pos{color:var(--green)}
+  .case-arrow{display:flex;flex-direction:column;align-items:center;gap:6px}
+  .case-arrow .arr{font-size:28px;color:var(--green);animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.15);opacity:.7}}
+  .case-arrow .delta{font-size:16px;font-weight:800;color:var(--green);background:#dcfce7;padding:4px 12px;border-radius:20px}
+  .case-desc{font-size:14.5px;color:var(--ink-soft);line-height:1.55}
+
   /* PROPOSITION */
   .prop{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
-  .prop-card{border:2px solid var(--violet-tint2);border-radius:18px;padding:30px}
+  .prop-card{border:2px solid var(--violet-tint2);border-radius:18px;padding:30px;transition:border-color .2s}
+  .prop-card:hover{border-color:var(--violet-soft)}
   .prop-card h4{font-size:18px;font-weight:800;margin-bottom:16px;display:flex;align-items:center;gap:10px;letter-spacing:-.3px}
   .prop-card ul{list-style:none}
   .prop-card li{padding:10px 0 10px 26px;font-size:14.5px;color:var(--ink-soft);position:relative;border-bottom:1px solid var(--line);line-height:1.5}
@@ -119,16 +152,19 @@
 
   /* REPARTITION */
   .repart{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:30px}
-  .rp{text-align:center;background:var(--violet-tint);border-radius:14px;padding:20px 12px;border:1px solid var(--line)}
+  .rp{text-align:center;background:var(--violet-tint);border-radius:14px;padding:20px 12px;border:1px solid var(--line);transition:transform .2s}
+  .rp:hover{transform:translateY(-3px)}
   .rp .rpn{font-size:22px;font-weight:800;color:var(--violet)}
   .rp .rpl{font-size:12px;color:var(--ink-soft);margin-top:6px;font-weight:600;line-height:1.3}
 
   /* BUDGET */
-  .budget{background:linear-gradient(135deg,var(--violet) 0%,var(--violet-deep) 100%);border-radius:22px;padding:48px;color:#fff}
-  .budget h3{font-size:26px;font-weight:800;margin-bottom:8px;letter-spacing:-.5px}
-  .budget .bsub{color:#e4d8ff;font-size:15px;margin-bottom:32px}
-  .budget-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-  .bcard{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:28px}
+  .budget{background:linear-gradient(135deg,var(--violet) 0%,var(--violet-deep) 100%);border-radius:22px;padding:48px;color:#fff;position:relative;overflow:hidden}
+  .budget::before{content:"";position:absolute;bottom:-40%;left:-15%;width:500px;height:500px;border-radius:50%;background:rgba(255,255,255,.03);animation:float 11s ease-in-out infinite}
+  .budget h3{font-size:26px;font-weight:800;margin-bottom:8px;letter-spacing:-.5px;position:relative}
+  .budget .bsub{color:#e4d8ff;font-size:15px;margin-bottom:32px;position:relative}
+  .budget-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;position:relative}
+  .bcard{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:28px;transition:background .2s}
+  .bcard:hover{background:rgba(255,255,255,.15)}
   .bcard .blbl{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#d7c4ff;margin-bottom:12px}
   .bcard .bval{font-size:32px;font-weight:800;letter-spacing:-1px;line-height:1.05}
   .bcard .bval small{font-size:16px;font-weight:600}
@@ -146,15 +182,22 @@
   footer .logo{color:#fff;font-size:18px}
   footer .logo span{color:var(--violet-soft)}
 
+  /* COUNTER ANIM */
+  .count-up{display:inline-block}
+
   @media(max-width:880px){
     .kpis,.gap-grid{grid-template-columns:repeat(2,1fr)}
-    .actions,.geo-grid,.prop,.budget-grid,.repart{grid-template-columns:1fr}
+    .actions,.geo-grid,.prop,.budget-grid{grid-template-columns:1fr}
+    .repart{grid-template-columns:repeat(3,1fr)}
     .geo-hero .stat-row{gap:20px}
     .hero h1{font-size:34px}h2{font-size:26px}
     .budget,.geo-hero{padding:32px}
     .bar-row .bl{width:90px}
+    .case-evol{grid-template-columns:1fr;text-align:center}
+    .case-arrow{flex-direction:row;justify-content:center}
+    .case-arrow .arr{transform:rotate(90deg)}
   }
-  @media print{.hero,.budget,.geo-hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}section{page-break-inside:avoid}}
+  @media print{.hero,.budget,.geo-hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}section{page-break-inside:avoid}.reveal{opacity:1!important;transform:none!important}}
 </style>
 </head>
 <body>
@@ -177,24 +220,24 @@
 <!-- 01 RESULTATS -->
 <section>
   <div class="page">
-    <div class="sec-kicker">01 · Résultats obtenus</div>
-    <h2>Les indicateurs qui comptent</h2>
-    <p class="lead">L'accompagnement a produit des résultats concrets : la conversion progresse, le chiffre d'affaires est en hausse, et le socle éditorial est solidement en place.</p>
+    <div class="sec-kicker reveal">01 · Résultats obtenus</div>
+    <h2 class="reveal reveal-d1">Les indicateurs qui comptent</h2>
+    <p class="lead reveal reveal-d2">L'accompagnement a produit des résultats concrets : la conversion progresse, le chiffre d'affaires est en hausse, et le socle éditorial est solidement en place.</p>
     <div class="kpis">
-      <div class="kpi accent">
+      <div class="kpi accent reveal reveal-d1">
         <div class="num">CA ↑</div>
-        <div class="lbl">Chiffre d'affaires en hausse, conversion améliorée</div>
+        <div class="lbl">Chiffre d'affaires en hausse, taux de conversion amélioré</div>
       </div>
-      <div class="kpi">
-        <div class="num">32</div>
+      <div class="kpi reveal reveal-d2">
+        <div class="num"><span class="count-up" data-target="32">0</span></div>
         <div class="lbl">articles SEO rédigés (24 publiés + 8 en production)</div>
       </div>
-      <div class="kpi">
-        <div class="num">+27</div>
+      <div class="kpi reveal reveal-d3">
+        <div class="num">+<span class="count-up" data-target="27">0</span></div>
         <div class="lbl">nouveaux domaines référents acquis depuis février</div>
       </div>
-      <div class="kpi">
-        <div class="num">20</div>
+      <div class="kpi reveal reveal-d4">
+        <div class="num"><span class="count-up" data-target="20">0</span></div>
         <div class="lbl">pages stratégiques optimisées, autorité en reprise</div>
       </div>
     </div>
@@ -204,29 +247,29 @@
 <!-- 02 ACTIONS -->
 <section>
   <div class="page">
-    <div class="sec-kicker">02 · Actions menées</div>
-    <h2>Les leviers activés</h2>
-    <p class="lead">Un plan d'action complet, technique et éditorial, pour poser les fondations d'une croissance organique durable.</p>
+    <div class="sec-kicker reveal">02 · Actions menées</div>
+    <h2 class="reveal reveal-d1">Les leviers activés</h2>
+    <p class="lead reveal reveal-d2">Un plan d'action complet, technique et éditorial, pour poser les fondations d'une croissance organique durable.</p>
     <div class="actions">
-      <div class="act">
+      <div class="act reveal reveal-d1">
         <div class="ico">🔧</div>
         <h4>Fondation technique</h4>
         <p>Correction complète des redirections post-refonte. Socle technique assaini, indexation rétablie.</p>
         <span class="tag">Fondation rétablie</span>
       </div>
-      <div class="act">
+      <div class="act reveal reveal-d2">
         <div class="ico">✍️</div>
         <h4>Production éditoriale</h4>
         <p>32 articles SEO (24 publiés, 8 en cours). Couverture large des intentions de recherche du secteur audio.</p>
         <span class="tag">32 articles</span>
       </div>
-      <div class="act">
+      <div class="act reveal reveal-d3">
         <div class="ico">🔗</div>
         <h4>Netlinking</h4>
         <p>27 nouveaux domaines référents acquis. Signal d'autorité directement corrélé à l'amélioration des positions.</p>
         <span class="tag">+27 domaines référents</span>
       </div>
-      <div class="act">
+      <div class="act reveal reveal-d4">
         <div class="ico">⚡</div>
         <h4>Optimisation des pages clés</h4>
         <p>20 pages stratégiques retravaillées en contenu. Amélioration appréciée par Google : positions et conversions en hausse.</p>
@@ -239,10 +282,10 @@
 <!-- 03 POTENTIEL -->
 <section>
   <div class="page">
-    <div class="sec-kicker">03 · Potentiel à capter</div>
-    <h2>Du volume à portée de main</h2>
-    <p class="lead">Des requêtes à très fort volume sont déjà indexées mais insuffisamment positionnées. Les remonter en top 10 représente le gisement de croissance le plus rapide.</p>
-    <div class="table-wrap">
+    <div class="sec-kicker reveal">03 · Potentiel à capter</div>
+    <h2 class="reveal reveal-d1">Du volume à portée de main</h2>
+    <p class="lead reveal reveal-d2">Des requêtes à très fort volume sont déjà indexées mais insuffisamment positionnées. Les remonter en top 10 représente le gisement de croissance le plus rapide.</p>
+    <div class="table-wrap reveal reveal-d2">
     <table>
       <thead><tr><th>Mot clé</th><th>Position</th><th>Volume mensuel</th><th>Signal</th></tr></thead>
       <tbody>
@@ -255,10 +298,9 @@
       </tbody>
     </table>
     </div>
-    <p class="note" style="margin-top:24px">À titre d'exemple, "bougie d'oreille" (pos 3, 1 128 clics/mois) et "audition" (pos 1, 1 170 clics/mois) démontrent ce que produit un top 3 : les requêtes ci-dessus ont le même potentiel une fois repositionnées.</p>
+    <p class="note reveal" style="margin-top:24px">À titre d'exemple, "bougie d'oreille" (pos 3, 1 128 clics/mois) et "audition" (pos 1, 1 170 clics/mois) démontrent ce que produit un top 3 : les requêtes ci-dessus ont le même potentiel une fois repositionnées.</p>
 
-    <!-- SERP SNAPSHOT -->
-    <div class="serp">
+    <div class="serp reveal">
       <h4>SERP "acouphène" : qui est cité, et pourquoi</h4>
       <div class="serp-item"><div class="serp-pos">1</div><div class="serp-domain">ameli.fr</div><div class="serp-tf">TF 72 · 35K RD</div></div>
       <div class="serp-item"><div class="serp-pos">2</div><div class="serp-domain">fondationpourlaudition.org</div><div class="serp-tf">TF 19 · 682 RD</div></div>
@@ -268,40 +310,40 @@
       <div class="serp-item"><div class="serp-pos">10</div><div class="serp-domain">inserm.fr</div><div class="serp-tf">TF 66 · 18.7K RD</div></div>
       <div class="serp-item us"><div class="serp-pos">17</div><div class="serp-domain">auditionconseil.fr</div><div class="serp-tf">TF 19 · 650 RD</div></div>
     </div>
-    <p class="note">fondationpourlaudition.org (pos 2) n'a que 682 RD et un TF de 19 : un profil comparable à auditionconseil. L'écart est donc rattrapable par une combinaison contenu + netlinking + GEO.</p>
+    <p class="note reveal">fondationpourlaudition.org (pos 2) n'a que 682 RD et un TF de 19 : un profil comparable à auditionconseil. L'écart est rattrapable par une combinaison contenu + netlinking + GEO.</p>
   </div>
 </section>
 
 <!-- 04 GAP -->
 <section>
   <div class="page">
-    <div class="sec-kicker">04 · Positionnement concurrentiel</div>
-    <h2>L'écart d'autorité à combler</h2>
-    <p class="lead">Le netlinking reste le facteur différenciant face aux grands réseaux. L'investissement netlinking doit s'inscrire dans la durée pour être compétitif.</p>
-    <div class="gap-grid">
+    <div class="sec-kicker reveal">04 · Positionnement concurrentiel</div>
+    <h2 class="reveal reveal-d1">L'écart d'autorité à combler</h2>
+    <p class="lead reveal reveal-d2">Le netlinking reste le facteur différenciant face aux grands réseaux. L'investissement netlinking doit s'inscrire dans la durée pour être compétitif.</p>
+    <div class="gap-grid reveal">
       <div class="gap-card us"><div class="rd">650</div><div class="name">Audition Conseil</div><div class="role">Nous</div></div>
       <div class="gap-card"><div class="rd">718</div><div class="name">Vivason</div><div class="role">Concurrent</div></div>
       <div class="gap-card"><div class="rd">2 450</div><div class="name">Krys</div><div class="role">Concurrent</div></div>
       <div class="gap-card"><div class="rd">3 578</div><div class="name">Amplifon</div><div class="role">Concurrent</div></div>
     </div>
-    <div style="margin-top:32px">
-      <div class="bar-row"><div class="bl">Audition Conseil</div><div class="bar-track"><div class="bar-fill" style="width:18.2%">650</div></div></div>
-      <div class="bar-row"><div class="bl">Vivason</div><div class="bar-track"><div class="bar-fill soft" style="width:20%">718</div></div></div>
-      <div class="bar-row"><div class="bl">Krys</div><div class="bar-track"><div class="bar-fill soft" style="width:68.5%">2 450</div></div></div>
-      <div class="bar-row"><div class="bl">Amplifon</div><div class="bar-track"><div class="bar-fill soft" style="width:100%">3 578</div></div></div>
+    <div class="bar-group reveal" style="margin-top:32px">
+      <div class="bar-row"><div class="bl">Audition Conseil</div><div class="bar-track"><div class="bar-fill" data-width="18.2%">650</div></div></div>
+      <div class="bar-row"><div class="bl">Vivason</div><div class="bar-track"><div class="bar-fill soft" data-width="20%">718</div></div></div>
+      <div class="bar-row"><div class="bl">Krys</div><div class="bar-track"><div class="bar-fill soft" data-width="68.5%">2 450</div></div></div>
+      <div class="bar-row"><div class="bl">Amplifon</div><div class="bar-track"><div class="bar-fill soft" data-width="100%">3 578</div></div></div>
     </div>
-    <p class="note">Domaines référents (source Majestic). Vivason est à portée immédiate. Combler l'écart avec Krys et Amplifon nécessite un investissement netlinking soutenu et régulier.</p>
+    <p class="note reveal">Domaines référents (source Majestic). Vivason est à portée immédiate. Combler l'écart avec Krys et Amplifon nécessite un investissement netlinking soutenu et régulier.</p>
   </div>
 </section>
 
-<!-- 05 GEO : SECTION PHARE -->
+<!-- 05 GEO -->
 <section>
   <div class="page">
-    <div class="sec-kicker">05 · L'avantage GEO</div>
-    <h2>Être cité par les IA, pas seulement classé</h2>
-    <p class="lead">ChatGPT, Perplexity et les AI Overviews de Google représentent déjà entre 15 et 25% du trafic de découverte sur les requêtes santé. Ne pas y être cité, c'est laisser ces clics aux concurrents.</p>
+    <div class="sec-kicker reveal">05 · L'avantage GEO</div>
+    <h2 class="reveal reveal-d1">Être cité par les IA, pas seulement classé</h2>
+    <p class="lead reveal reveal-d2">ChatGPT, Perplexity et les AI Overviews de Google représentent déjà entre 15 et 25% du trafic de découverte sur les requêtes santé. Ne pas y être cité, c'est laisser ces clics aux concurrents.</p>
 
-    <div class="geo-hero">
+    <div class="geo-hero reveal">
       <h3>Pourquoi le GEO change la donne maintenant</h3>
       <div class="stat-row">
         <div class="stat"><div class="big">+40%</div><div class="slbl">de visibilité mesurée sur les pages optimisées GEO (étude Princeton, répliquée 2026)</div></div>
@@ -312,55 +354,72 @@
     </div>
 
     <div class="geo-grid">
-      <div class="geo">
+      <div class="geo reveal reveal-d1">
         <div class="n">FONDATION</div>
         <h4>Contenu lisible par les IA</h4>
         <p>Information critique dans le HTML, indexée Google et Bing. Les crawlers IA ne rendent pas le JavaScript : le contenu doit être accessible sans exécution.</p>
       </div>
-      <div class="geo">
+      <div class="geo reveal reveal-d2">
         <div class="n">TRIADE VALIDÉE</div>
         <h4>Stats, sources, experts</h4>
         <p>Les 3 seuls signaux prouvés empiriquement pour augmenter la probabilité de citation : un chiffre précis, une source autoritaire, une citation d'expert.</p>
       </div>
-      <div class="geo">
+      <div class="geo reveal reveal-d3">
         <div class="n">EXTRACTIBILITÉ</div>
         <h4>Réponse en 1ère phrase</h4>
         <p>Chaque bloc de contenu répond directement à la requête et survit isolé. C'est exactement ce que les moteurs IA extraient pour citer.</p>
       </div>
-      <div class="geo">
+      <div class="geo reveal reveal-d1">
         <div class="n">YMYL SANTÉ</div>
         <h4>Conformité audition</h4>
         <p>Contenu santé sourcé, disclaimers visibles, zéro claim non autorisé : indispensable pour les requêtes médicales comme acouphène ou appareil auditif.</p>
       </div>
-      <div class="geo">
+      <div class="geo reveal reveal-d2">
         <div class="n">AUTORITÉ OFF-SITE</div>
         <h4>Cohérence d'entité</h4>
         <p>Fiches santé, Google Business, annuaires spécialisés : l'IA cite les entités cohérentes et mentionnées hors de leur propre site.</p>
       </div>
-      <div class="geo">
+      <div class="geo reveal reveal-d3">
         <div class="n">MESURE</div>
         <h4>Boucle de citation</h4>
         <p>Requêtes piliers testées mensuellement sur ChatGPT, Perplexity, AI Overviews. Suivi des citations gagnées et perdues. Itération sur données, jamais sur intuition.</p>
       </div>
     </div>
 
-    <div style="background:var(--violet-tint);border-radius:16px;padding:28px;margin-top:28px;border:2px solid var(--violet)">
-      <h4 style="font-size:16px;font-weight:800;color:var(--violet);margin-bottom:10px">Cas concret : "acouphène" sur ChatGPT Search</h4>
-      <p style="font-size:14.5px;color:var(--ink-soft);line-height:1.55">Aujourd'hui, ChatGPT cite ameli.fr, inserm.fr et france-acouphenes.fr pour cette requête. Audition Conseil n'est pas cité. Avec le protocole GEO appliqué, la page /les-acouphenes/ qui est déjà en position 17 peut devenir éligible à la citation IA, en complément de la remontée SERP classique. Le GEO est un accélérateur : il capte du trafic que le SEO seul ne peut pas atteindre.</p>
+    <!-- CAS CONCRET BEFORE / AFTER -->
+    <div class="case-box reveal">
+      <h4>"acouphène" sur Google : la preuve en temps réel</h4>
+      <div class="case-evol">
+        <div class="case-card before">
+          <div class="cc-label">M-1</div>
+          <div class="cc-pos">24<sup style="font-size:18px">e</sup></div>
+          <div style="font-size:12px;color:var(--muted);margin-top:6px">Page 3 Google</div>
+        </div>
+        <div class="case-arrow">
+          <div class="delta">+7 pos.</div>
+          <div class="arr">→</div>
+        </div>
+        <div class="case-card after">
+          <div class="cc-label">Aujourd'hui</div>
+          <div class="cc-pos">17<sup style="font-size:18px">e</sup></div>
+          <div style="font-size:12px;color:var(--muted);margin-top:6px">Page 2 Google</div>
+        </div>
+      </div>
+      <p class="case-desc">Sur la requête "acouphène" (27 100 recherches/mois), auditionconseil.fr a gagné <b>7 positions en un mois</b>. Aujourd'hui, ChatGPT cite ameli.fr, inserm.fr et france-acouphenes.fr pour cette requête, pas Audition Conseil. Le protocole GEO appliqué à la page /les-acouphenes/ la rend éligible à la citation IA en complément de la remontée SERP. Le GEO capte du trafic que le SEO seul ne peut pas atteindre.</p>
     </div>
 
-    <p class="note">Aucun protocole ne garantit la citation : la sélection des moteurs IA est non déterministe. La méthode en maximise la probabilité et améliore mécaniquement le SEO classique.</p>
+    <p class="note reveal">Aucun protocole ne garantit la citation : la sélection des moteurs IA est non déterministe. La méthode en maximise la probabilité et améliore mécaniquement le SEO classique.</p>
   </div>
 </section>
 
-<!-- 06 PROPOSITION 12 MOIS -->
+<!-- 06 PROPOSITION -->
 <section>
   <div class="page">
-    <div class="sec-kicker">06 · Feuille de route 12 mois</div>
-    <h2>Ce que nous préconisons</h2>
-    <p class="lead">Amplifier la dynamique sur trois axes : volume éditorial, autorité, et optimisation GEO pour maximiser la visibilité SEO et IA.</p>
+    <div class="sec-kicker reveal">06 · Feuille de route 12 mois</div>
+    <h2 class="reveal reveal-d1">Ce que nous préconisons</h2>
+    <p class="lead reveal reveal-d2">Amplifier la dynamique sur trois axes : volume éditorial, autorité, et optimisation GEO pour maximiser la visibilité SEO et IA.</p>
     <div class="prop">
-      <div class="prop-card">
+      <div class="prop-card reveal reveal-d1">
         <h4>📈 Contenu & conversion</h4>
         <ul>
           <li>Maintenir le rythme de <b>8 articles SEO/mois</b></li>
@@ -369,7 +428,7 @@
           <li>Optimiser les <b>320 pages centres</b> : levier local à plus fort effet multiplicateur</li>
         </ul>
       </div>
-      <div class="prop-card">
+      <div class="prop-card reveal reveal-d2">
         <h4>🔗 Autorité & visibilité IA</h4>
         <ul>
           <li>Augmenter le <b>budget netlinking mensuel</b> pour combler le gap concurrentiel</li>
@@ -379,25 +438,24 @@
         </ul>
       </div>
     </div>
-
-    <div class="repart">
+    <div class="repart reveal">
       <div class="rp"><div class="rpn">2j</div><div class="rpl">Éditorial SEO</div></div>
       <div class="rp"><div class="rpn">1.5j</div><div class="rpl">Optim on-page</div></div>
       <div class="rp"><div class="rpn">1j</div><div class="rpl">Netlinking pilotage</div></div>
       <div class="rp"><div class="rpn">1j</div><div class="rpl">GEO protocole</div></div>
       <div class="rp"><div class="rpn">0.5j</div><div class="rpl">Reporting & suivi</div></div>
     </div>
-    <p class="note">Répartition indicative des 6 jours mensuels. Ajustable selon les priorités du mois.</p>
+    <p class="note reveal">Répartition indicative des 6 jours mensuels. Ajustable selon les priorités du mois.</p>
   </div>
 </section>
 
 <!-- 07 BUDGET -->
 <section>
   <div class="page">
-    <div class="sec-kicker">07 · Investissement</div>
-    <h2>Budget proposé sur 12 mois</h2>
-    <p class="lead">Un investissement calibré pour capitaliser sur les résultats acquis et réduire l'écart concurrentiel.</p>
-    <div class="budget">
+    <div class="sec-kicker reveal">07 · Investissement</div>
+    <h2 class="reveal reveal-d1">Budget proposé sur 12 mois</h2>
+    <p class="lead reveal reveal-d2">Un investissement calibré pour capitaliser sur les résultats acquis et réduire l'écart concurrentiel.</p>
+    <div class="budget reveal">
       <h3>Accompagnement SEO / GEO + Netlinking</h3>
       <div class="bsub">Engagement mensuel sur 12 mois</div>
       <div class="budget-grid">
@@ -418,7 +476,7 @@
 
 <!-- CTA -->
 <div class="cta">
-  <div class="page">
+  <div class="page reveal">
     <h2>La conversion est là. Accélérons la visibilité.</h2>
     <p>Les résultats sont concrets, le socle est en place, le potentiel de trafic est identifié. Les 12 prochains mois transforment cette base en croissance organique durable, SEO et IA.</p>
     <div class="sign">Team Kwantic<span>SEO / GEO · Juin 2026</span></div>
@@ -431,6 +489,45 @@
     <div>Proposition SEO/GEO · Audition Conseil · Confidentiel · Juin 2026</div>
   </div>
 </footer>
+
+<script>
+// Intersection Observer for reveal animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)} });
+}, {threshold: 0.12, rootMargin: '0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Animated bar fills
+const barObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.bar-fill').forEach(b => { b.style.width = b.dataset.width });
+      barObs.unobserve(e.target);
+    }
+  });
+}, {threshold: 0.3});
+document.querySelectorAll('.bar-group').forEach(el => barObs.observe(el));
+
+// Count-up animation
+const countObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      const target = parseInt(e.target.dataset.target);
+      const duration = 1200;
+      const start = performance.now();
+      const step = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        e.target.textContent = Math.round(eased * target);
+        if(progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+      countObs.unobserve(e.target);
+    }
+  });
+}, {threshold: 0.5});
+document.querySelectorAll('.count-up').forEach(el => countObs.observe(el));
+</script>
 
 </body>
 </html>
